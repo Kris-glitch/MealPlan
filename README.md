@@ -1,4 +1,4 @@
-![1](https://github.com/Kris-glitch/MealPlan/assets/78586563/042844cd-40a6-4d63-97bb-8ab81ffbb253)# MealPlan
+# MealPlan
 This web application was my Harvard CS50 final project.
 
 Video Demo: <URL https://youtu.be/Kw-HNzG7Ke8>
