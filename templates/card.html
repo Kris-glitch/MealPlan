@@ -1,0 +1,129 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Card
+{% endblock %}
+
+{% block main %}
+<form method="POST" action="/card" enctype="multipart/form-data" autocomplete="off">
+<div id="card">
+  <!-- This is the name of the recipe -->
+  <h5 id="NameOfRecipe"class="show">{{ name }}</h5>
+  <!-- This is the hidden name of the recipe -->
+  <h5 id="NameOfRecipe"class="hidden"><input id="new_name" name="new_name" placeholder="{{ name }}"/></h5>
+  <!-- This is the read only name of the recipe -->
+  <input type="hidden" readonly name="hiddenField" value="{{ name }}">
+  <div id="inside-card">
+      <ul class="list-group list-group-flush" id="Ingredients_Quantities">
+        <!-- This are the hidden buttons and input -->
+        <div class="hidden" style = "display: inline;">
+          <input type="text" id="item_ingredient" placeholder="Ingredient" />
+          <input type="text" id="item_quantity" placeholder="Quantity"/>
+          <select name="item_measurement" type="text" id="item_measurement" >
+            <option selected>Measurement</option>
+            <option value="g">g</option>
+            <option value="mg">mg</option>
+            <option value="l">l</option>
+            <option value="ml">ml</option>
+            <option value="pieces">pieces</option>
+            </select>
+          <button onclick="removeItem()" style="display: inline-block" class="hidden" id="deleteButton" name="deleteButton" type="button" class="btn btn-secondary"><i class="fas fa-trash"></i></button>
+          <button onclick="addItem()" style="display: inline-block" class="hidden" id="add" name="add" type="button" class="btn btn-secondary"><i class="fa-regular fa-square-plus"></i></button>
+       </div>
+        {% for row in formated_ingredients %}
+        <!-- This is the list of ingredients, quantities and measurements -->
+        <li>{{ row.ingredient.ingredient }} {{ row.quantity.quantity }} {{ row.measurement.measurement }}</li>
+        {% endfor %}
+        </ul>
+      </br>
+       <!-- This is the description -->
+      <span id="description" class="placeholder" style="width: 100%;">
+        <textarea class="show" id="description_input" name="description" rows="5" cols="50" readonly>{{ description }}</textarea>
+      <!-- This is the hidden description -->
+      <textarea class="hidden" id="description_input" name="description" rows="5" cols="50" placeholder="{{ description }}"></textarea>
+      </span>
+  </div>
+    <button id="EditButton" name="EditButton" type="button" class="btn btn-secondary">Edit</button>
+    </br>
+    <button id="SaveButton" name="SaveButton" type="submit" class="btn btn-secondary">Save</button>
+    </br>
+    <div id="flash-messages">
+      {% with messages = get_flashed_messages() %}
+           {% if messages %}
+              <ul class="flash-messages">
+                  {% for message in messages %}
+                      <li>{{ message }}</li>
+                  {% endfor %}
+              </ul>
+          {% endif %}
+      {% endwith %}
+    </div>
+</div>
+</form>
+
+<script>
+// Get all elements with the "hidden" class
+var elementsToHide = document.getElementsByClassName("hidden");
+// Loop through each element and hide it
+for (var i = 0; i < elementsToHide.length; i++) {
+  elementsToHide[i].style.display = "none";
+}
+
+// When the page loads, loop through the existing ingredients and quantities and add them to the arrays
+const hiddenIngredientElements = document.querySelectorAll('li[name="hiddenIngredient"]');
+const hiddenIngredientValues = Array.from(hiddenIngredientElements).map(element => element.value);
+
+const hiddenQuantityElements = document.querySelectorAll('li[name="hiddenQuantity"]');
+const hiddenQuantityValues = Array.from(hiddenQuantityElements).map(element => element.value);
+
+const new_ingredients = hiddenIngredientValues;
+const new_quantities = hiddenQuantityValues;
+
+// When the Edit button is clicked, toggle the visibility of the "hidden" and "show" elements
+document.getElementById("EditButton").addEventListener("click", function() {
+  const elementsToShow = document.getElementsByClassName("hidden");
+  const elementsToHide = document.getElementsByClassName("show");
+
+  // Loop through each element and show it
+  for (let i = 0; i < elementsToShow.length; i++) {
+    elementsToShow[i].style.display = "inline-block";
+  }
+
+  // Loop through each element and hide it
+  for (let i = 0; i < elementsToHide.length; i++) {
+    elementsToHide[i].style.display = "none";
+  }
+});
+function addItem() {
+            var a = document.getElementById("Ingredients_Quantities");
+            var item_ingredient = document.getElementById("item_ingredient");
+            var item_quantity = document.getElementById("item_quantity");
+            var item_measurement = document.getElementById("item_measurement");
+            var li = document.createElement("li");
+            li.setAttribute('id', item_ingredient.value + " " + item_quantity.value + " " + item_measurement.value);
+            li.appendChild(document.createTextNode(item_ingredient.value + " " + item_quantity.value + " " + item_measurement.value));
+            a.appendChild(li);
+        }
+
+function removeItem() {
+
+  var a = document.getElementById("Ingredients_Quantities");
+  var ingredientInput = document.getElementById("item_ingredient");
+  var quantityInput = document.getElementById("item_quantity");
+  var measurementSelect = document.getElementById("item_measurement");
+
+  var ingredient = ingredientInput.value;
+  var quantity = quantityInput.value;
+  var measurement = measurementSelect.value;
+
+  var li = a.querySelector(`li[id="${ingredient} ${quantity} ${measurement}"]`);
+
+  if (li) {
+    a.removeChild(li);
+  }
+}
+
+
+
+</script>
+{% endblock %}

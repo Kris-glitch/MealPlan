@@ -1,0 +1,250 @@
+:root {
+	--green: #D7E5D7;
+	--darker: #3D8361;
+	--darkest: #1C6758;
+	--grey: #6B7280;
+	--light: #EEF2E6;
+}
+
+
+#new-ingredient-submit{
+    color: var(--darkest);
+	font-size: 1.25rem;
+	font-weight: 700;
+	background-image: linear-gradient(to right, var(--darker), var(--grey));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	cursor: pointer;
+	transition: 0.4s;
+    border-style: none;
+}
+
+#new-ingredient-submit:hover{
+    opacity: 0.8;
+}
+
+#new-ingredient-submit:active{
+    opacity: 0.6;
+}
+
+#ingredients_quantities .ingredient{
+    display: flex;
+	justify-content: space-between;
+	background-color: var(--darkest);
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-bottom: 1rem;
+}
+
+body{
+    background-color: rgb(215, 229, 215);
+}
+
+.nav-link:hover {
+    color: rgb(56, 105, 55);
+  }
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-1 {
+    flex: 1 1 0%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.m-2 {
+    margin: 0.5rem;
+}
+
+#navdiv{
+    display: block;
+    height: 80%
+}
+
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    padding: 10px 0;
+    background-color: rgb(184, 184, 184);
+    font-size: 20px;
+}
+.container-sm{
+    margin-left: 250px;
+    height: 500px;
+}
+
+h1{
+    font-size: 80px;
+    color: rgb(255, 255, 255);
+    font-family: "Bauhaus 93 Regular";
+}
+
+h6{
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    font-family: "Bauhaus 93 Regular";
+    margin-top:30px;
+    padding: 0px;
+    margin-bottom:0px;
+    margin-left: 65px;
+}
+
+#generate_button{
+    margin-top: 20px;
+}
+
+#generate_list{
+    margin-top: 20px;
+}
+
+#table_category{
+    font-weight: bold;
+}
+
+#remember_switch{
+    margin-top: 20px;
+}
+
+#addIngridient{
+    margin-top: 20px;
+}
+
+#addrecipe{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#title_second{
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    padding-top: 30px;
+}
+
+#recipe_title{
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#ingredient{
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#quantity{
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#description{
+    margin-top: 20px;
+    height: 200px;
+}
+
+#description_input{
+    height: 200px;
+    width: 100%
+}
+#breakfast{
+    text-decoration: none;
+    color: gray;
+}
+
+#lunch{
+    text-decoration: none;
+    color: gray;
+}
+#dinner{
+    text-decoration: none;
+    color: gray;
+}
+
+#dessert{
+    text-decoration: none;
+    color: gray;
+}
+
+#card{
+    margin-left: 270px;
+    height: 500px;
+}
+
+#inside-card{
+
+    height: 500px;
+    margin-top: 30px;
+    margin-right: 50%;
+    padding-top: 5px;
+}
+
+h5{
+    font-size: 70px;
+    color: rgb(255, 255, 255);
+    font-family: "Bauhaus 93 Regular";
+}
+#new_name{
+    width: 102%;
+}
+#new_description{
+    width: 100%;
+}
+#EditButton{
+    margin-top: 20px;
+}
+
+#SaveButton{
+    margin-top: 20px;
+}
+
+#card-description{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.list-group{
+    display: flex;
+    align-items: left;
+    background-color: white;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 20px;
+    list-style:none;
+}
+.ing{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+#listItemIngredient{
+    width: 50%;
+    display: inline;
+}
+
+#listItemQuantity{
+    width: 50%;
+    display: inline;
+}
+
+#measurement{
+    width: 10%;
+    height: 9.5%;
+
+}
+
+#shopping_items{
+    display: flex;
+    flex-direction: row;
+}
+
+#shop{
+    display: flex;
+    flex-direction: column;
+}

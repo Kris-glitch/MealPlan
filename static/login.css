@@ -1,0 +1,43 @@
+body {
+    background-image: url("/static/loginhd.jpg");
+    background-size: cover;
+    position: relative;
+  }
+
+  #main {
+      position: fixed;
+      bottom: 50px;
+      right: 420px;
+      z-index: 1;
+      text-align: center;
+      margin: auto;
+      width: 50%;
+  }
+
+  #placeholder-img {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+  }
+
+  h1 {
+      font-size: 150px;
+      color: rgb(255, 255, 255);
+      font-family: "Bauhaus 93 Regular";
+      margin-bottom: 20px;
+  }
+
+  input {
+    padding: 10px;
+    margin: 10px;
+  }
+
+  button {
+      margin-bottom: 20px;
+      margin-top: 10px;
+  }
+
+  #flash-messages{
+    background-color:"green"
+    font-size: 30px;
+  }

@@ -1,0 +1,22 @@
+# Ignore compiled Python files
+__pycache__/
+
+# Ignore database file
+meals.db
+
+# Ignore session data
+flask_session/
+
+# Ignore Python virtual environment directory (if you create one)
+venv/
+
+# Ignore compiled Python bytecode (if applicable)
+*.pyc
+
+# Ignore pipenv specific files (if you use Pipenv)
+Pipfile.lock
+Pipfile
+
+# Ignore any local environment files (e.g., .env or .env.local)
+.env
+.env.local

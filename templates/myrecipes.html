@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Recipes
+{% endblock %}
+
+{% block main %}
+<form method="POST" action="/myrecipes" enctype="multipart/form-data" autocomplete="off">
+    <div class="container-sm">
+        <h1 id="titlemain">YOUR RECEPIES:</h1>
+        <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th>Breakfast</th>
+                <th>Lunch</th>
+                <th>Dinner</th>
+                <th>Dessert</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for recipe in recipes %}
+                <tr>
+                    <td><a id='breakfast' href="/card?name={{ recipe.breakfast.name }}">{% if recipe.breakfast %} {{ recipe.breakfast.name }} {% endif %}</a></td>
+                    <td><a id='lunch' href="/card?name={{ recipe.lunch.name }}">{% if recipe.lunch %} {{ recipe.lunch.name }} {% endif %}</a></td>
+                    <td><a id='dinner'href="/card?name={{ recipe.dinner.name }}">{% if recipe.dinner %} {{ recipe.dinner.name }} {% endif %}</a></td>
+                    <td><a id='dessert' href="/card?name={{ recipe.dessert.name }}">{% if recipe.dessert %} {{ recipe.dessert.name }} {% endif %}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        <h2 id = "title_second">ADD A NEW RECIPE</h2>
+            <select name="category" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option selected>Categories</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Dinner">Dinner</option>
+                    <option value="Dessert">Dessert</option>
+            </select>
+                </br>
+                <input id="recipe_title" name="recipe" type="text" placeholder="Recipe title" />
+                </br>
+                <input id="ingredient" name="ingredient" type="text" placeholder="Ingredient" />
+                <input id="quantity" name="quantity" type="numeric" placeholder="Quantity" />
+                <select name="measurement" type="text" id="measurement" >
+                        <option selected>Measurement</option>
+                        <option value="g">g</option>
+                        <option value="mg">mg</option>
+                        <option value="l">l</option>
+                        <option value="ml">ml</option>
+                        <option value="pieces">pieces</option>
+                </select>
+                <ul class="list-group list-group-flush" id="result_list"></ul>
+                </br>
+                <button id="addIngredient" name="add" type="button" class="btn btn-secondary">Add ingredient</button>
+                </br>
+                <span id="description" class="placeholder" style="width: 100%;">
+                    <textarea id="description_input" name="description" rows="5" cols="50" placeholder="Description"></textarea>
+                </span>
+                </br>
+                <button id="addrecipe" name="add" type="submit" class="btn btn-secondary">Add recipe</button>
+            <div id="flash-messages">
+                {% with messages = get_flashed_messages() %}
+                     {% if messages %}
+                        <ul class="flash-messages">
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+    </div>
+</form>
+
+<script>
+const addButton = document.getElementById('addIngredient');
+const ingredientInput = document.getElementById('ingredient');
+const quantityInput = document.getElementById('quantity');
+const resultList = document.getElementById('result_list');
+var select = document.getElementById('measurement');
+
+
+addButton.addEventListener('click', function(event) {
+  event.preventDefault();
+
+  // Get the ingredient and quantity from the input fields
+  const ingredient = ingredientInput.value;
+  const quantity =  Number(quantityInput.value);
+  var measurement = select.options[select.selectedIndex].value;
+
+  // TODO: Do nothing if ingredient and quantity are empty
+
+  if (!ingredient || !quantity) {
+    alert("You must input ingredient and quantity");
+    return;
+  }
+
+  if (!(typeof quantity === "number")){
+    alert("Quantity must be a numeric value");
+    return;
+  }
+
+
+  // Create a new list item with the ingredient and quantity
+  const newItem = document.createElement('li');
+  newItem.class = 'list-group-item';
+  newItem.innerHTML = `${ingredient} ${quantity} ${measurement}`;
+
+  const newIngredient = document.createElement('input');
+  newIngredient.type = 'hidden';
+  newIngredient.name = 'ingredientInputItem';
+  newIngredient.value = ingredient;
+
+  const newQuantity = document.createElement('input');
+  newQuantity.type = 'hidden';
+  newQuantity.name = 'quantityInputItem';
+  newQuantity.value = quantity;
+
+  const newMeasurement = document.createElement('input');
+  newMeasurement.type = 'hidden';
+  newMeasurement.name = 'measurementInputItem';
+  newMeasurement.value = measurement;
+
+  // Add the list item to the list
+  newItem.appendChild(newIngredient);
+  newItem.appendChild(newQuantity);
+  newItem.appendChild(newMeasurement);
+
+  resultList.appendChild(newItem);
+
+  // Clear the input fields
+  ingredientInput.value = '';
+  quantityInput.value= '';
+
+});
+
+</script>
+{% endblock %}

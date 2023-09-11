@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-sm">
+        <h1 id="titlemain">YOUR MEAL PLAN:</h1>
+        <table class="table">
+        <thead class="table-dark">
+            <tr>
+                {% for day in days_of_week %}
+                  <th>{{ day }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+              {% for day in days_of_week %}
+                <td>
+                  <p id="table_category">Breakfast</p>
+                    {% if breakfast_weekly|length > loop.index %}
+                        <p>{{ breakfast_weekly[loop.index]['name'] }}</p>
+                    {% else %}
+                    <p>None</p>
+                    {% endif %}
+                  <p id="table_category">Lunch</p>
+                    {% if lunch_weekly|length > loop.index %}
+                        <p>{{ lunch_weekly[loop.index]['name'] }}</p>
+                    {% else %}
+                    <p>None</p>
+                    {% endif %}
+                  <p id="table_category">Dinner</p>
+                    {% if dinner_weekly|length > loop.index %}
+                        <p>{{ dinner_weekly[loop.index]['name'] }}</p>
+                    {% else %}
+                    <p>None</p>
+                    {% endif %}
+                  <p id="table_category">Dessert</p>
+                    {% if dessert_weekly|length > loop.index %}
+                        <p>{{ dessert_weekly[loop.index]['name'] }}</p>
+                    {% else %}
+                    <p>None</p>
+                    {% endif %}
+                </td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+        <button id="generate_button" name="generate_table" type="button" class="btn btn-secondary">Generate new meal plan</button>
+        <button id="generate_list" name="generate_list" type="button" class="btn btn-secondary">Generate new shopping list</button>
+        <h2 id="title_second">SWITCH A RECEPIE</h2>
+        <form action="/switch" method="post">
+
+            <select name="food_category" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option selected>Food category</option>
+                    <option>Breakfast</option>
+                    <option>Lunch</option>
+                    <option>Dinner</option>
+                    <option>Dessert</option>
+            </select>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="switch_meal" placeholder="Meal to switch"></input>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="new_meal" placeholder="New meal"></input>
+            </br>
+            <button id="remember_switch" name="remember_switch" type="submit" class="btn btn-secondary">Save</button>
+        </form>
+        <div id="flash-messages">
+            {% with messages = get_flashed_messages() %}
+                 {% if messages %}
+                    <ul class="flash-messages">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+          </div>
+    </div>
+
+    <script>
+        document.getElementById('generate_button').addEventListener('click', function() {
+        fetch('/generate', {
+            method: 'POST'
+        })
+        });
+        document.getElementById('generate_list').addEventListener('click', function() {
+        fetch('/shopping', {
+            method: 'POST'
+        })
+        });
+    </script>
+
+{% endblock %}

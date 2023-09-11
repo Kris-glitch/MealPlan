@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Shopping
+{% endblock %}
+
+{% block main %}
+<form action="/shopping" method="get">
+<div class="container-sm">
+    <h1 id="titleshopping">SHOPPING LIST:</h1>
+    <div class="row">
+        {% set columns = shopping_list|slice(4) %}
+        {% for column in columns %}
+            <div class="col-3">
+                <ul>
+                    {% for item in column %}
+                    <li class="d-flex align-items-sm-stretch">
+                        <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
+                        <label class="form-check-label" for="firstCheckbox">{{ item["ingredient"] }} {{ item["sum(ingredients.quantity)"] }} {{ item["measurement"] }}</label>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</form>
+{% endblock %}
